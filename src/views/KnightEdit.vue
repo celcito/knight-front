@@ -30,7 +30,12 @@
 
                 <div class="form-group">
                   <label :for="`name_${idx}`">Name</label>
-                  <Field :id="`name_${idx}`" :name="`weapons[${idx}].name`" class="form-control" />
+                  <Field
+                    :id="`name_${idx}`"
+                    :name="`weapons[${idx}].name`"
+                    class="form-control"
+                    :rules="isRequired"
+                  />
                   <ErrorMessage :name="`weapons[${idx}].name`" />
                 </div>
 
@@ -41,6 +46,7 @@
                     type="number"
                     :name="`weapons[${idx}].mod`"
                     class="form-control"
+                    :rules="isRequired"
                   />
                   <ErrorMessage :name="`weapons[${idx}].mod`" />
                 </div>
@@ -158,6 +164,7 @@ export default {
       this.knight = response.data
 
       this.knight.birthday = this.knight.birthday.split('T')[0]
+      this.knight.keyAttribute = 'strength'
 
       console.log('response.data', response.data)
     } catch (error) {

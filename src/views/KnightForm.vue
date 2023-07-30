@@ -181,6 +181,7 @@ export default {
       try {
         if (values) {
           if (values.weapons) values.weapons[values.weapons.length - 1].equipped = true
+          values.keyAttribute = 'strength'
         }
 
         await this.createKnight(values)
@@ -190,8 +191,7 @@ export default {
     },
     async createKnight(values) {
       try {
-        const response = await api.post('/knigts', values)
-        this.$router.push(`/knigts`)
+        await api.post('/knigts', values).then(this.$router.push(`/knigts`))
       } catch (error) {
         console.error('Erro ao criar um novo knight:', error)
         throw error
