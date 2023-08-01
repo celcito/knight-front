@@ -24,9 +24,9 @@
           </div>
 
           <div class="form-group">
-            <FieldArray name="weapons" v-slot="{ fields, push, remove }">
+            <FieldArray v-if="knight.weapons" name="weapons" v-slot="{ fields, push, remove }">
               <fieldset class="InputGroup" v-for="(field, idx) in fields" :key="field.key">
-                <h6>Arma {{ idx }}</h6>
+                <h6>Arma {{ idx + 1 }}</h6>
 
                 <div class="form-group">
                   <label :for="`name_${idx}`">Name</label>
@@ -35,6 +35,7 @@
                     :name="`weapons[${idx}].name`"
                     class="form-control"
                     :rules="isRequired"
+                    :v-model="`weapons[${idx}].name`"
                   />
                   <ErrorMessage :name="`weapons[${idx}].name`" />
                 </div>
@@ -49,6 +50,14 @@
                     :rules="isRequired"
                   />
                   <ErrorMessage :name="`weapons[${idx}].mod`" />
+
+                  <Field
+                    :id="`name_${idx}`"
+                    type="hidden"
+                    :name="`weapons[${idx}].equipped`"
+                    class="form-control"
+                    :rules="isRequired"
+                  />
                 </div>
               </fieldset>
               <div class="row justify-content-between">
